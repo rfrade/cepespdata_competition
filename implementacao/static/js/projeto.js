@@ -3,6 +3,9 @@
  * 
  * Feito por rafael frade
  */
+function exibir_tela_mapas() {
+	 $('#area_conteudo').html("/tela_graficos.html");
+}
 
 /**
  * Realiza uma requisição ajax passando os parâmetros do form
@@ -19,6 +22,18 @@ function ajax_mapa() {
  */
 function gerar_mapa(json) {
 	$.get('/static/mapas_ibge/brasil.html', function (html) {
-	    $('#area_mapa').html(html);
+	    $('#page-content').html(html);
 	});
+}
+
+function exibir_tela_graficos() {
+	
+}
+
+function ajax_grafico() {
+	$.getJSON('/gerarGrafico', null, function (json) {gerar_grafico(json)});
+}
+
+function gerar_grafico() {
+	
 }

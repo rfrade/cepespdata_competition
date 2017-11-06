@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="portlet light">
+				<div class="portlet-title">
+					<div class="caption font-green-haze">
+						<i class="icon-briefcase"></i> <span
+							class="caption-subject bold uppercase"> Mapas com os
+							resultados das eleições <span class="label label-info">BETA</span>
+						</span>
+					</div>
+				</div>
+				<div class="portlet-body form">
+
+					<p>Esta página permite visualizar os resultados das eleições
+						brasileiras por meio de mapas.</p>
+
+
+					<div class="form-body">
+						<div class="row">
+							<div class="form-group col-md-3 col-xs-12">
+								<label for="job-input">Cargo:</label> <select name="cargo"
+									id="job-input" class="form-control" required>
+									<option value="1" selected>Presidente</option>
+									<option value="3">Governador</option>
+									<option value="5">Senador</option>
+									<option value="6">Deputado Federal</option>
+									<option value="7">Deputado Estadual</option>
+									<option value="8">Deputado Distrital</option>
+									<option value="11">Prefeito</option>
+									<option value="13">Vereador</option>
+								</select>
+							</div>
+							<div class="form-group col-md-3 col-xs-12">
+								<label for="regionalAggregation-input">Agregação
+									Regional:</label> <select name="agregacao_regional"
+									id="regionalAggregation-input" class="form-control" required>
+									<option value="0">Brasil</option>
+									<option value="2" selected>UF</option>
+									<option value="6">Municipio</option>
+									<option value="7">Municipio-Zona</option>
+									<option value="8">Zona</option>
+									<option value="1">Macro Região</option>
+									<option value="4">Meso Região</option>
+									<option value="5">Micro Região</option>
+								</select>
+							</div>
+							<div class="form-group col-md-3 col-xs-12">
+								<label for="politicalAggregation-input">Agregação
+									Política:</label> <select name="agregacao_politica"
+									id="politicalAggregation-input" class="form-control" required>
+									<option value="2" selected>Candidato</option>
+									<option value="1">Partido</option>
+									<option value="3">Coligacao</option>
+									<option value="4">Consolidado da Eleição</option>
+								</select>
+							</div>
+							<div class="form-group col-md-3 col-xs-12">
+								<label for="year-input">Ano:</label> <select name="anos[]"
+									id="year-input" class="form-control" multiple required>
+
+									<option value="2014" selected>2014</option>
+
+									<option value="2010">2010</option>
+
+									<option value="2006">2006</option>
+
+									<option value="2002">2002</option>
+
+									<option value="1998">1998</option>
+
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-3 col-xs-12" id="filter-uf"
+							style="display: none">
+							<label for="filter-uf-input">Filter by: <b>UF</b></label> <select
+								name="uf_filter" id="filter-uf-input" class="form-control">
+								<option value=""></option>
+
+								<option value="AC">AC</option>
+
+								<option value="AL">AL</option>
+
+								<option value="AM">AM</option>
+
+								<option value="AP">AP</option>
+
+								<option value="BA">BA</option>
+
+								<option value="CE">CE</option>
+
+								<option value="DF">DF</option>
+
+								<option value="ES">ES</option>
+
+								<option value="GO">GO</option>
+
+								<option value="MA">MA</option>
+
+								<option value="MG">MG</option>
+
+								<option value="MS">MS</option>
+
+								<option value="MT">MT</option>
+
+								<option value="PA">PA</option>
+
+								<option value="PB">PB</option>
+
+								<option value="PE">PE</option>
+
+								<option value="PI">PI</option>
+
+								<option value="PR">PR</option>
+
+								<option value="RJ">RJ</option>
+
+								<option value="RN">RN</option>
+
+								<option value="RO">RO</option>
+
+								<option value="RR">RR</option>
+
+								<option value="RS">RS</option>
+
+								<option value="SC">SC</option>
+
+								<option value="SE">SE</option>
+
+								<option value="SP">SP</option>
+
+								<option value="TO">TO</option>
+
+							</select>
+						</div>
+					</div>
+
+					<!--        <div class="row">
+                                 <div class="col-md-2">
+                                    <div class="md-checkbox">
+                                        <input type="checkbox" name="brancos" id="brancos-input" class="md-check" value="1" >
+                                        <label for="brancos-input">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            Adicionar <b>VOTOS BRANCOS</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="md-checkbox">
+                                        <input type="checkbox" name="nulos" id="nulos-input" class="md-check" value="1" >
+                                        <label for="nulos-input">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            Adicionar <b>VOTOS NULOS</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>-->
+
+					<div class="form-actions">
+						<button class="btn blue" onclick="ajax_mapa()">Gerar
+							Mapa</button>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- <div class="portlet box blue" id="table-area"
+							style="display: none"></div> -->
+			<div id="area_mapa"></div>
+
+		</div>
+	</div>
+</body>
+</html>
