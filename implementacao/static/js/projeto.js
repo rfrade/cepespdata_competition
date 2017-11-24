@@ -1,39 +1,63 @@
 /**
- * Faz as requisições ajax, processa os mapas e gera os gráficos
- * 
- * Feito por rafael frade
- */
-function exibir_tela_mapas() {
-	 $('#area_conteudo').html("/tela_graficos.html");
-}
-
-/**
- * Realiza uma requisição ajax passando os parâmetros do form
- * e utiliza os dados do objeto json retornado do server
- * para gerar os mapas.
+ * Realiza uma requisição ajax passando os parâmetros do form e utiliza os dados
+ * do objeto json retornado do server para gerar os mapas.
  */
 function ajax_mapa() {
-	$.getJSON('/gerarMapa', null, function (json) {gerar_mapa(json)});
+	$.getJSON('/gerarMapa', null, function(json) {
+		gerar_mapa(json)
+	});
 }
 
 /**
  * Gera o mapa com o json e exibe na tela
+ * 
  * @param data
  */
 function gerar_mapa(json) {
-	$.get('/static/mapas_ibge/brasil.html', function (html) {
-	    $('#page-content').html(html);
+	$.get('/static/mapas_ibge/brasil.html', function(html) {
+		$('#area_mapa').html(html);
 	});
 }
 
-function exibir_tela_graficos() {
-	
-}
-
 function ajax_grafico() {
-	$.getJSON('/gerarGrafico', null, function (json) {gerar_grafico(json)});
+	var grafico = $('#select__tipo_grafico').val();
+	var cargo = $('#job-input').val();
+	var agregacaoRegional = $('#regionalAggregation-input').val();
+	var agregacaoPolitica = $('#politicalAggregation-input').val();
+
+	var requestJSON = {
+		"grafico" : grafico,
+		"cargo" : cargo,
+		"ar" : agregacaoRegional,
+		"ap" : agregacaoPolitica
+	};
+
+	var retorno = null;
+	$.getJSON('/gerarGrafico', requestJSON, function(json) {
+		gerar_grafico(json)
+		retorno = json;
+	});
+	return retorno;
 }
 
-function gerar_grafico() {
+function gerar_grafico(json) {
 	
+	
+	var lista = [];
+	for (var i = 0; i < json.length; i++) {
+		var linha = {
+				x : [ json.eleicoes ],
+				y : [ json.valores ],
+				mode: 'lines',
+				name : json[i].partido
+		};
+		lista.push(linha);
+	}
+	
+	
+	Plotly.plot(document.getElementById("area_grafico"), lista, {
+		margin : {
+			t : 0
+		}
+	});
 }

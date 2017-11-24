@@ -4,7 +4,6 @@ Created on 3 de nov de 2017
 @author: Rafael
 '''
 
-from numpy import nan
 import unittest
 from cepesp_python import cepesp
 
