@@ -41,23 +41,30 @@ function ajax_grafico() {
 }
 
 function gerar_grafico(json) {
-	
-	
+
 	var lista = [];
 	for (var i = 0; i < json.length; i++) {
 		var linha = {
-				x : [ json.eleicoes ],
-				y : [ json.valores ],
-				mode: 'lines',
-				name : json[i].partido
+			x : json[i].eleicoes,
+			y : json[i].votos_por_eleicao,
+			mode : 'lines',
+			name : json[i].partido
 		};
 		lista.push(linha);
 	}
-	
-	
-	Plotly.plot(document.getElementById("area_grafico"), lista, {
+
+	var layout = {
 		margin : {
-			t : 0
+			t: 20,
+			l: 20,
+			pad : 10
+		},
+		width : 600,
+		height : 350,
+		xaxis: {
+			type : 'category'
 		}
-	});
+	};
+
+	Plotly.newPlot(document.getElementById("area_grafico"), lista, layout);
 }

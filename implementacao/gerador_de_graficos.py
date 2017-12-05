@@ -61,7 +61,7 @@ def get_json_grafico_historico_de_votos(cargo=cepesp.CARGO.PRESIDENTE,
     for x in range(1,4):
         partido = Partido()
         partido.partido = "P" + str(x)
-        partido.eleicoes = [200, 2004, 2008]
+        partido.eleicoes = [2000, 2004, 2008]
         partido.votos_por_eleicao = [x*2, x*3, x*4]
         resultados.append(partido)
 
